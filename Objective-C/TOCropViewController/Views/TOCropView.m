@@ -26,7 +26,7 @@
 #import "TOCropOverlayView.h"
 #import "TOCropScrollView.h"
 
-#define TOCROPVIEW_BACKGROUND_COLOR [UIColor colorWithWhite:0.12f alpha:1.0f]
+#define TOCROPVIEW_BACKGROUND_COLOR [UIColor colorWithWhite:1.0f alpha:1.0f]
 
 static const CGFloat kTOCropViewPadding = 14.0f;
 static const NSTimeInterval kTOCropTimerDuration = 0.8f;
@@ -194,7 +194,7 @@ typedef NS_ENUM(NSInteger, TOCropViewOverlayEdge) {
     
     //Translucency View
     if (NSClassFromString(@"UIVisualEffectView")) {
-        self.translucencyEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+        self.translucencyEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
         self.translucencyView = [[UIVisualEffectView alloc] initWithEffect:self.translucencyEffect];
         self.translucencyView.frame = self.bounds;
     }

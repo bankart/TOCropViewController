@@ -243,6 +243,8 @@
  */
 @property (nonatomic, assign) BOOL aspectRatioPickerButtonHidden;
 
+@property (nonatomic, assign) BOOL isToolbarHidden;
+
 /** 
  If `showActivitySheetOnDone` is true, then these activity items will 
  be supplied to that UIActivityViewController in addition to the 

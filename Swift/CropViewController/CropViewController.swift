@@ -349,6 +349,11 @@ open class CropViewController: UIViewController, TOCropViewControllerDelegate {
         return toCropViewController.toolbar
     }
 
+    public var toolbarHidden: Bool {
+        set { toCropViewController.toolbar.isHidden = newValue }
+        get { toCropViewController.toolbar.isHidden }
+    }
+
     /*
      If this controller is embedded in UINavigationController its navigation bar is hidden by default. Set this property to false to show the navigation bar. This must be set before this controller is presented.
      */

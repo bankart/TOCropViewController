@@ -29,8 +29,10 @@
     TOCropViewController *cropController = [[TOCropViewController alloc] initWithCroppingStyle:self.croppingStyle image:image];
     cropController.delegate = self;
 
+    cropController.isToolbarHidden = true;
+
     // Uncomment this if you wish to provide extra instructions via a title label
-    //cropController.title = @"Crop Image";
+    cropController.title = @"Crop Image";
 
     // -- Uncomment these if you want to test out restoring to a previous crop setting --
     //cropController.angle = 90; // The initial angle in which the image will be rotated
@@ -95,6 +97,7 @@
 {
     // When tapping the image view, restore the image to the previous cropping state
     TOCropViewController *cropController = [[TOCropViewController alloc] initWithCroppingStyle:self.croppingStyle image:self.image];
+    cropController.isToolbarHidden = YES;
     cropController.delegate = self;
     CGRect viewFrame = [self.view convertRect:self.imageView.frame toView:self.navigationController.view];
     [cropController presentAnimatedFromParentViewController:self

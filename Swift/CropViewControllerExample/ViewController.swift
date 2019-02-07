@@ -25,7 +25,7 @@ class ViewController: UIViewController, CropViewControllerDelegate, UIImagePicke
         cropController.delegate = self
         
         // Uncomment this if you wish to provide extra instructions via a title label
-        //cropController.title = "Crop Image"
+        cropController.title = "Crop Image"
     
         // -- Uncomment these if you want to test out restoring to a previous crop setting --
         //cropController.angle = 90 // The initial angle in which the image will be rotated

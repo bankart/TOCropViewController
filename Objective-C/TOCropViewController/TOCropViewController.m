@@ -67,6 +67,11 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
 /* Flag to perform initial setup on the first run */
 @property (nonatomic, assign) BOOL firstTime;
 
+
+@property (nonatomic, strong) UIButton *closeButton;
+@property (nonatomic, strong) UIButton *doneButton;
+@property (nonatomic, strong) UIButton *rotateButton;
+
 @end
 
 @implementation TOCropViewController
@@ -129,6 +134,37 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
     self.toolbar.clampButtonTapped = ^{ [weakSelf showAspectRatioDialog]; };
     self.toolbar.rotateCounterclockwiseButtonTapped = ^{ [weakSelf rotateCropViewCounterclockwise]; };
     self.toolbar.rotateClockwiseButtonTapped        = ^{ [weakSelf rotateCropViewClockwise]; };
+    self.closeButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [self.closeButton setTitle:@"X" forState:UIControlStateNormal];
+    [self.closeButton setFrame:CGRectMake(30, 30, 50, 50)];
+    [self.closeButton addTarget:self action:@selector(closeButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.closeButton];
+    
+    self.doneButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [self.doneButton setTitle:@"Done" forState:UIControlStateNormal];
+    [self.doneButton setFrame:CGRectMake(self.view.frame.size.width - 80, 30, 50, 50)];
+    [self.doneButton addTarget:self action:@selector(doneButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.doneButton];
+    
+    self.rotateButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [self.rotateButton setTitle:@"rotate" forState:UIControlStateNormal];
+    [self.rotateButton setFrame:CGRectMake(self.view.frame.size.width / 2 - 25, self.view.frame.origin.y + self.view.frame.size.height - 80, 50, 50)];
+    [self.rotateButton addTarget:self action:@selector(rotateButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.rotateButton];
+}
+
+
+- (void)closeButtonTapped {
+    NSLog(@"close");
+}
+
+//- (void)doneButtonTapped {
+//    NSLog(@"done");
+//}
+
+- (void)rotateButtonTapped {
+    NSLog(@"rotate");
+    [self.cropView rotateImageNinetyDegreesAnimated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -1057,7 +1093,7 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
     _titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     _titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
     _titleLabel.backgroundColor = [UIColor clearColor];
-    _titleLabel.textColor = [UIColor whiteColor];
+//    _titleLabel.textColor = [UIColor whiteColor];
     _titleLabel.numberOfLines = 1;
     _titleLabel.baselineAdjustment = UIBaselineAdjustmentAlignBaselines;
     _titleLabel.clipsToBounds = YES;
@@ -1121,6 +1157,14 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
 - (BOOL)aspectRatioPickerButtonHidden
 {
     return self.toolbar.clampButtonHidden;
+}
+
+- (BOOL)isToolbarHidden {
+    return self.toolbar.hidden;
+}
+
+- (void)setIsToolbarHidden:(BOOL)isToolbarHidden {
+    self.toolbar.hidden = isToolbarHidden;
 }
 
 - (void)setResetAspectRatioEnabled:(BOOL)resetAspectRatioEnabled
