@@ -144,6 +144,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, assign) CGRect imageCropFrame;
 
+@property (nonatomic, assign) CGFloat minimumCropLength;
+@property (nonatomic, assign) CGFloat maximumCropLength;
+
 /**
  Set the grid overlay graphic to be hidden
  */
@@ -284,7 +287,7 @@ The minimum croping aspect ratio. If set, user is prevented from setting croppin
  When triggered, the crop view will perform a relayout to ensure the crop box
  fills the entire crop view region
  */
-- (void)moveCroppedContentToCenterAnimated:(BOOL)animated;
+- (void)moveCroppedContentToCenterAnimated:(BOOL)animated isFirstTime:(BOOL)isFirstTime;
 
 @end
 

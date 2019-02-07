@@ -32,7 +32,7 @@
     cropController.isToolbarHidden = true;
 
     // Uncomment this if you wish to provide extra instructions via a title label
-    cropController.title = @"Crop Image";
+//    cropController.title = @"Crop Image";
 
     // -- Uncomment these if you want to test out restoring to a previous crop setting --
     //cropController.angle = 90; // The initial angle in which the image will be rotated
@@ -68,6 +68,7 @@
     //cropController.cropView.translucencyAlwaysHidden = YES;
 
     self.image = image;
+    NSLog(@"image.size: %@, scale: %f", NSStringFromCGSize(image.size), image.scale);
     
     //If profile picture, push onto the same navigation stack
     if (self.croppingStyle == TOCropViewCroppingStyleCircular) {

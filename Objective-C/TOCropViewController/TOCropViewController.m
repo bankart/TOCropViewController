@@ -465,7 +465,7 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
 
     self.cropView.frame = [self frameForCropViewWithVerticalLayout:self.verticalLayout];
     [self adjustCropViewInsets];
-    [self.cropView moveCroppedContentToCenterAnimated:NO];
+    [self.cropView moveCroppedContentToCenterAnimated:NO isFirstTime: self.firstTime];
 
     if (self.firstTime == NO) {
         [self.cropView performInitialSetup];
@@ -474,7 +474,7 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
     
     if (self.title.length) {
         self.titleLabel.frame = [self frameForTitleLabelWithSize:self.titleLabel.frame.size verticalLayout:self.verticalLayout];
-        [self.cropView moveCroppedContentToCenterAnimated:NO];
+        [self.cropView moveCroppedContentToCenterAnimated:NO isFirstTime: NO];
     }
 
     [UIView performWithoutAnimation:^{
@@ -1070,6 +1070,8 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
     // don't add it until our parent view controller view has loaded at the right time
     if (!_cropView) {
         _cropView = [[TOCropView alloc] initWithCroppingStyle:self.croppingStyle image:self.image];
+        _cropView.minimumCropLength = 400.0 / self.image.scale;
+        _cropView.maximumCropLength = 1280.0 / self.image.scale;
         _cropView.delegate = self;
         _cropView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [self.view addSubview:_cropView];
